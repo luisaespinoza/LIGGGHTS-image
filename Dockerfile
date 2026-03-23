@@ -15,7 +15,7 @@ RUN git clone https://github.com/CFDEMproject/LIGGGHTS-PUBLIC.git
 
 WORKDIR /opt/LIGGGHTS-PUBLIC/src
 
-RUN make auto || true && \
+RUN cp MAKE/Makefile.user_default MAKE/Makefile.user && \
     sed -i 's/USE_VTK = "ON"/USE_VTK = "OFF"/' MAKE/Makefile.user && \
     make auto
 
