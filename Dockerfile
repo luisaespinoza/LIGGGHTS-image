@@ -14,8 +14,10 @@ WORKDIR /opt
 RUN git clone https://github.com/CFDEMproject/LIGGGHTS-PUBLIC.git
 
 WORKDIR /opt/LIGGGHTS-PUBLIC/src
-RUN make auto
+
+RUN make auto || true && \
+    sed -i 's/USE_VTK = "ON"/USE_VTK = "OFF"/' MAKE/Makefile.user && \
+    make auto
 
 ENV PATH="/opt/LIGGGHTS-PUBLIC/src:${PATH}"
-
 WORKDIR /work
